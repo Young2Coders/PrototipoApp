@@ -1,0 +1,54 @@
+<div class="jumbotron" ng-controller="AlunoCtrl">
+            <h3>Lista de Alunos</h3> 
+            <div class="voltar">
+                <button class="btn btn-primary" ng-click="voltar()" ng-hide="addFormShow">Voltar</button>
+            </div>
+            
+            <hr>
+                <input class="form-control" type="text" ng-model="filtroAluno" placeholder="Pesquisar por..." />
+            <hr>
+            <table class="table table-bordered">
+                <thead>
+                    <tr class="danger">
+                        <td><h5><strong><a href="" ng-click="ordenarPor('alunoNumero')">Nº</a></strong></h5></td>
+                        <td><h5><strong><a href="" ng-click="ordenarPor('alunoNome')">Nome</a></strong></h5></td>
+                        <td><h5><strong>Faltas</strong></h5></td>
+                        <td><h5><strong>Nota</strong></h5></td>
+                        <td><h5><strong>Editar</strong></h5></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="active" ng-repeat="aluno in alunos | filter: filtroAluno | orderBy:criterioDeOrdenacao:direcaoDaOrdenacao">
+                        <td>{{aluno.alunoNumero | uppercase}}</td>
+                        <td>{{aluno.alunoNome | uppercase}}</td>
+                        <td>{{aluno.alunoFalta | uppercase}}</td>
+                        <td>{{aluno.alunoNota | uppercase}}</td>
+                        <td>
+                            <button class="glyphicon glyphicon-pencil" ng-click="mostrarAluno(aluno)" ></button>
+                            <button class="glyphicon glyphicon-trash" ng-click="apagarAluno(aluno)" ></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr>
+            <form ng-submit="enviarFormulario()" ng-show="addFormShow">
+                <input class="form-control" type="text" ng-model="alunoNumero" placeholder="Nº do Aluno(a)" />
+                <input class="form-control" type="text" ng-model="alunoNome" placeholder="Nome do Aluno(a)" />
+                <input class="form-control" type="text" ng-model="alunoFalta" placeholder="Faltas" />
+                <input class="form-control" type="text" ng-model="alunoNota" placeholder="Nota" />
+                <button type="submit" value="" class="btn btn-success btn-block">OK</button>
+            </form>
+                
+            <form ng-submit="editFormSubmit()" ng-show="editFormShow">
+                <input class="form-control" type="text" ng-model="alunoNumero" placeholder="Nº do Aluno(a)" />
+                <input class="form-control" type="text" ng-model="alunoNome" placeholder="Nome do Aluno(a)" />
+                <input class="form-control" type="text" ng-model="alunoFalta" placeholder="Faltas" />
+                <input class="form-control" type="text" ng-model="alunoNota" placeholder="Nota" />
+                <button type="submit" value="" class="btn btn-success btn-block">OK</button>
+            </form>
+            <hr>
+        
+            <button class="btn btn-success" ng-click="mostrarFormulario()" ng-hide="addFormShow">+</button>
+            <button class="btn btn-warning" ng-click="esconderFormulario()" ng-show="addFormShow">-</button>
+
+        </div> 

@@ -1,0 +1,46 @@
+<div class="jumbotron" ng-controller="DisciplinaCtrl">
+            <h3>Lista de Disciplinas</h3> 
+            <div class="voltar">
+                <button class="btn btn-primary" ng-click="voltar()" ng-hide="addFormShow">Voltar</button>
+            </div>
+            
+            <hr>
+                <input class="form-control" type="text" ng-model="filtroDisciplina" placeholder="Pesquisar por..." />
+            <hr>
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr class="danger">
+                        <td><h5><strong><a href="" ng-click="ordenarPor('disciplinaNome')">Disciplina</a></strong></h5></td>
+                        <td><h5><strong>Professores</strong></h5></td>
+                        <td><h5><strong>Apagar</strong></h5></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="active" ng-repeat="disciplina in disciplinas | filter: filtroDisciplina | orderBy:criterioDeOrdenacao:direcaoDaOrdenacao">
+                        <td>{{disciplina.disciplinaNome | uppercase }}</td>
+                        <td>
+                            <button class="btn btn-primary btn-sm" ng-click="redirecionandoUsuario()" >Ver</button>
+                        </td>
+                        <td>
+                            <button class="btn btn-danger btn-sm" ng-click="apagarDisciplina(disciplina)" >X</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr>
+            <form ng-submit="enviarFormulario()" ng-show="addFormShow">
+                <input class="form-control" type="text" ng-model="disciplinaNome" placeholder="Nome da Disciplina" />
+                <button type="submit" value="" class="btn btn-success btn-block">OK</button>
+            </form>
+                
+            <form ng-submit="editFormSubmit()" ng-show="editFormShow">
+                    <input type="text" ng-model="disciplinaNome" placeholder="Nome da Disciplina" />
+                    <input type="submit" value="" class="glyphicon glyphicon-ok" />
+            </form>
+            <hr>
+        
+            <button class="btn btn-success" ng-click="mostrarFormulario()" ng-hide="addFormShow">+</button>
+            <button class="btn btn-warning" ng-click="esconderFormulario()" ng-show="addFormShow">-</button>
+
+        </div> 
